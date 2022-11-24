@@ -9,7 +9,7 @@ const { createUser, loginUser, createCompaign, redirect,toggleCampaign } = requi
 // const { createBlog, GetBlog, updateBlog, deleteBlogById, deleteBlogByQuerParmas } = require('../controller/blogController');
 
 // Check Creadentail and Authorization from middle ware
-const { userAuth } = require("../middleware/middleware.js")
+const middleware  = require("../middleware/middleware.js")
 
 
 // API for user routes
@@ -18,8 +18,8 @@ router.post("/api/login", loginUser);
 
 // API for blogs routes
 router.post("/createCompaign",  createCompaign);
-router.get("/api/redirect",  redirect);
-router.get("/api/toggle",  toggleCampaign);
+router.get("/api/redirect",/*middleware.userAuth*/  redirect);
+router.get("/api/toggle", /*middleware.userAuth*/toggleCampaign);
 
 // router.get("/blogs", autherAuth, GetBlog);
 

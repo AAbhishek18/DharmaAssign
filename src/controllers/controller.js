@@ -142,8 +142,19 @@ let createCompaign = async function (req, res) {
             return res.status(400).send({ status: false, msg: "offers is required" })     
         };
 
-        const compaignData = { id, short_token, name, offers,enabled }
-        const newCompaign = await compaignModel.create(compaignData);
+        let compaignData = { id, short_token, name, offers,enabled }
+        
+        //convert object to string by srtinigfy
+
+        //compaignData = JSON.parse(JSON.stringify(compaignData));
+        
+
+
+
+
+
+    
+        let newCompaign = await compaignModel.create(compaignData);
         res.status(201).send({ status: true, message: "compaignData created successfully", data: newCompaign })
 
     } catch (error) {
@@ -157,6 +168,7 @@ let createCompaign = async function (req, res) {
 const redirect = async function (req, res){
     const short_token = req.query.short_token;
     const click_id = req.query.click_id;
+    
 
     //Find campaign
     const campaign = await compaignModel.findOne({short_token: short_token});
@@ -187,18 +199,19 @@ const redirect = async function (req, res){
     if(click_id){
           offer_url = offer_url.replace("{click_id}", click_id);
     }
-    return res.redirect(offer_url);
+    return res.status(200).redirect(offers);
 }
 
 
 //================================= 8 point Apis =====================
 
 const toggleCampaign = async function (req, res){
-    const id = req.params.id;
+    const id = req.params._id;
 
+    
     const campaign = await compaignModel.findById(id);
     if(!campaign){
-          return res.status(404).json({message: "Campaign not found"});
+          return res.status(404).send({message: "Campaign not found"});
     };
 
     campaign.enabled = !campaign.enabled;

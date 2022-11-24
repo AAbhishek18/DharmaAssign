@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+
+const ObjectId = mongoose.Schema.Types.ObjectId;
 const campaignSchema = new mongoose.Schema({
       id: {
             type: Number,
@@ -14,16 +16,10 @@ const campaignSchema = new mongoose.Schema({
             type: String,
             required: true
       },
-    //   offers: [{
-    //         offer_url: {
-    //               type: String,
-    //             //   required: true
-    //         },
-    //         ratio_percentage: {
-    //               type: Number,
-    //             //   required: true
-    //         },
-    //   }],
+      offers: [{
+           type:String,
+             required: true
+      }],
       enabled: {
             type: Boolean,
             required: true
